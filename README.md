@@ -1,47 +1,15 @@
-## Practica 2 Interfaces Inteligentes Introducción a los scripts en Unity
+## Practica 3 Delegados, Eventos
 
 Marcos Jesús Barrios Lorenzo
 
 alu0101056944
 
-- (Trabajo realizado)[#trabajo-realizado]
-- (Ejercicios)[#ejercicios]
-
 ### Trabajo realizado
 
-!(Resultado final)[assets/finalresult.gif]
+Se creó el script singleton [src/Scripts/MySceneController.cs](src/Scripts/MySceneController.cs) con los eventos de colisión en cilindro B y colisión con cilindro A. Otro script [src/Scripts/Events/Subscribers/ShowUITextOnCollisionWithB.cs](src/Scripts/Events/Subscribers/ShowUITextOnCollisionWithB.cs), que muestra en pantalla una etiqueta cuando el evento colisión con cilindro B ocurre se agregó a los cilindros de tipo A. También se modificó el script para empujar los cilindros B [src/Scripts/Cylinders/PushOnSpacebar.cs](src/Scripts/Cylinders/PushOnSpacebar.cs) de forma que cuando alguien colisione con el cilindro A la fuerza del empuje aumente. Un último script [src/Scripts/Controllers/Events/Callers/CallEventOnCollisionWithCylinder.cs](src/Scripts/Controllers/Events/Callers/CallEventOnCollisionWithCylinder.cs) agregado al jugador dispara los eventos de colisión de cilindros.
 
-!(Ejercicio 2)[assets/2.gif]
+A continuación el script [src/Scripts/Events/CloseToPlayerEvent.cs](src/Scripts/Events/CloseToPlayerEvent.cs) define un evento estático para que los cilindros A se subscriban con el script [src/Scripts/Events/Subscribers/ChangeColorOnPlayerCloseToA.cs](src/Scripts/Events/Subscribers/ChangeColorOnPlayerCloseToA.cs) y cambien de color cuando ocurra ese evento. Un script [src/Scripts/Events/Subscribers/RotateOnPlayerCloseToA.cs](/src/Scripts/Events/Subscribers/RotateOnPlayerCloseToA.cs) también se subscribe y orienta el GameObject hacia el objeto especificado en el editor mediante un campo public. Se creó un nuevo script [src/Scripts/Cubes/MovingCube.cs](src/Scripts/Cubes/MovingCube.cs) que mueve el GameObject en el eje Z para demostrar la rotación de la esfera.
 
+Después se ajustó el script de controlador del cubo [src/Scripts/Controllers/MyCharacterController.cs](src/Scripts/Controllers/MyCharacterController.cs) para que se mueva respecto a sus propios ejes y no a los globales con el objetivo de fijar la cámara como GameObject hijo a modo de tercera persona. El movimiento ha pasado a ser basado en físicas en vez de con el transform.
 
-Se siguió el guión para el primer ejercicio y se respondió en este mismo documento. Después se creó el script para el control de un cubo, dejando la cámara fija desde arriba. Finalmente se creó un cilindro que aumenta su tamaño, otro que puede ser empujado con la tecla espacio y uno que huye del jugador cuando se acerca. Un tipo cubo puede ser manejado por IJLM y cambia de color brevemente cuando cualquier objeto colisiona con él. Además, hay cubos que cambian de tamaño cuando el jugador se acerca, que también reaccionan a una esfera haciéndose más pequeños.
-
-### Ejercicios
-
-
-1. Crear una escena simple sobre la que probar diferentes configuraciones de objetos físicos en Unity. La escena debe tener un plano a modo de suelo, una esfera y un cubo.
-
-    1. **Ninguno de los objetos será físico.**
-    !(1a)[assets/1a.gif]
-    > Los objetos quedan estáticos en la posición en la que estaban.
-    
-    2. **La esfera tiene físicas, el cubo no.**
-    !(1b)[assets/1b.gif]
-    > La esfera colisiona con el cubo y el suelo, rodando y moviéndose en el proceso.
-    
-    3. **La esfera y el cubo son físicos y la esfera tiene 10 veces la masa del cubo.**
-    !(1c)[assets/1c.gif]
-    > Ambos son afectados por la gravedad y colisionan el uno con el otro. La esfera es más pesada que el cubo. La masa influye en la forma en que colisionan los objetos; la esfera se resiste más que el cubo.
-    
-    4. **La esfera tiene físicas y el cubo es de tipo IsTrigger.**
-    !(1d)[assets/1d.gif]
-    > La esfera es afectada por físicas y atraviesa el cubo a pesar de que este último contiene un Box Collider.
-
-    5. **La esfera tiene físicas y el cubo es de tipo IsTrigger y tiene físicas.**
-     !(1e)[assets/1e.gif]
-    > La esfera es afectada por físicas pero el cubo no, a pesar de tener un componente RigidBody. Es útil para tener más control sobre el objeto a través de scripts cuando sea necesario, es decir, como un interruptor para las fuerzas físicas sin tener que eliminar el componente.
-
-    6. **La esfera y el cubo son físicos y la esfera tiene 10 veces la masa del cubo, se impide la rotación del cubo sobre el plano XZ.**
-    !(1f)[assets/1f.gif]
-    > El cubo no puede rotar si la esfera colisiona con él en direcciones que impliquen modificar el ángulo respecto a los ejes X ó Z.
-
+Finalmente, para demostrar el uso de <code>Debug.DrawRay()</code> se modificó el evento [src/Scripts/Events/CloseToPlayerEvent.cs](src/Scripts/Events/CloseToPlayerEvent.cs) para que dibuje una linea en la vista de escena desde el centro del cilindro que tiene el script hasta el jugador cuando éste se acerque lo suficiente.

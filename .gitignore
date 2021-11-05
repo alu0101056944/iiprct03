@@ -1,3 +1,4 @@
 ~
 *.odt
 .~lock.Decisiones.odt#
+*.meta
