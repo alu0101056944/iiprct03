@@ -1,8 +1,10 @@
-## Practica 3 Delegados, Eventos
+## Práctica 3 Delegados, Eventos
 
 Marcos Jesús Barrios Lorenzo
 
 alu0101056944
+
+![Work done](assets/work.gif)
 
 ### Trabajo realizado
 
